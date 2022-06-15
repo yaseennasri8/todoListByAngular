@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Todo } from 'src/app/Todo';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-todo',
@@ -8,6 +8,16 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent{
+  addTodoForm = new FormGroup({
+    title: new FormControl('',[
+      Validators.required
+    ]),
+    desc: new FormControl('',[
+      Validators.required
+    ])
+  })
+
+
   todos?: Todo[];
   loacalItem?: string | null;
   sno?: number;
@@ -17,7 +27,7 @@ export class AddTodoComponent{
   
   constructor() {   }
 
-  onSubmit(submit: NgForm) {
+  onSubmit(submit: any) {
     this.loacalItem = localStorage.getItem('todos');
     if(this.loacalItem === null) {
       this.todos = [];
@@ -33,5 +43,4 @@ export class AddTodoComponent{
     this.todoAdd.emit(todo);
     submit.reset();
   }
-
 }

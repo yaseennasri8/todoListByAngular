@@ -1,13 +1,23 @@
 <div class="my-3">
   <h4>Add a todo</h4>
-  <form #submit="ngForm" (ngSubmit)="onSubmit(submit)">
+  <form #submit="ngForm" (ngSubmit)="onSubmit(submit)" [formGroup]="addTodoForm">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" [(ngModel)]="title" class="form-control" name="title" id="title" aria-describedby="titlehelp">
+      <input formControlName="title" type="text" [(ngModel)]="title" class="form-control" name="title"
+       id="title" aria-describedby="titlehelp" minlength="3">
+       <p class="text-danger" *ngIf="addTodoForm.controls.title.touched && addTodoForm.controls.title.errors?.['required']">Field is required</p>
+       <p class="text-danger" *ngIf="addTodoForm.controls.title.errors?.['minlength']">
+        The value you inputted is 
+        {{ addTodoForm.controls.title.errors?.['minlength'].actualLength }} 
+        characters. It must be atleast
+        {{ addTodoForm.controls.title.errors?.['minlength'].requiredLength }} 
+        characters length.
+      </p>
     </div>
     <div class="mb-3">
       <label for="desc" class="form-label">Description</label>
-      <input type="text" [(ngModel)]="desc" class="form-control" name="desc" id="desc">
+      <input formControlName="desc" type="text" [(ngModel)]="desc" class="form-control" name="desc" id="desc">
+      <p class="text-danger" *ngIf="addTodoForm.controls.desc.touched && addTodoForm.controls.desc.errors?.['required']">Field is required</p>
     </div>
     <button type="submit" class="btn btn-sm btn-success">Add Todo</button>
   </form>
