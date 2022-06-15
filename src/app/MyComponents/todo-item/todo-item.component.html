@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <h6>Serial No: {{ todo.sno }}</h6>
+  <h5>{{ todo.title }}</h5>
+  <p>{{ todo.desc }}</p>
+  <button class="btn btn-sm btn-danger" (click)="onClick(todo)">Delete</button>
+  <button class="btn btn-sm btn-primary mx-3" (click)="update(todo)">Update</button>
+</div>
