@@ -1,3 +1,5 @@
+<div class="container">
+  <h3 class="text-center mt-3 mb-3">Todo list by angular</h3>
 <app-add-todo (todoAdd)="addTodo($event)"></app-add-todo>
 <h4>Your todos</h4><hr>
 <div *ngIf="this.todos.length == 0; else elseBlock">No Todos to display</div>
@@ -5,3 +7,4 @@
   <app-todo-item [todo] = "todo" (todoDelete) = "deleteTodo($event)" (todoUpdate)="updateTodo($event)"></app-todo-item>
 </div>
 <ng-template #elseBlock></ng-template>
+</div>
