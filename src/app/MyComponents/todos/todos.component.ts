@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Todo } from '../../Todo'
 
 @Component({
@@ -6,7 +6,9 @@ import { Todo } from '../../Todo'
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css']
 })
-export class TodosComponent {
+export class TodosComponent implements OnChanges, OnInit {
+  // updateTodoIndex?: number;
+  taskToUpdate?:Todo 
   todos: Todo [];
   localItem: string | null; //remove and check error
   constructor() {
@@ -16,6 +18,14 @@ export class TodosComponent {
     } else {
       this.todos = JSON.parse(this.localItem);
     }
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
   deleteTodo(todo: Todo) {
@@ -28,7 +38,19 @@ export class TodosComponent {
     localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
-  updateTodo(todo: Todo) {
-    console.log("this should update:::", todo);
+  shouldUpdateTodo(todo: Todo) {
+    // this.updateTodoIndex = this.todos.indexOf(todo); 
+    this.taskToUpdate = todo;
   }
+
+  updateTodo(todos: Todo[]) {
+    localStorage.setItem("todos", JSON.stringify(todos));
+    this.localItem = localStorage.getItem("todos"); 
+    if(this.localItem == null) {
+      this.todos= [];
+    } else {
+      this.todos = JSON.parse(this.localItem);
+    }
+  }
+
 }

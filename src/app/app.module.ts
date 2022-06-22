@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './MyComponents/navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './MyComponents/about/about.component';
+import { InputComponent } from './MyComponents/input/input.component';
+import { ButtonComponent } from './MyComponents/button/button.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { AboutComponent } from './MyComponents/about/about.component';
     AddTodoComponent,
     NavbarComponent,
     AboutComponent,
+    InputComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
